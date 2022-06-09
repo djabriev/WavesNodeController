@@ -151,8 +151,11 @@ def run_telegram_bot():
                         elif message == 'restart node':
                             restart_node()
 
-                        elif message == 'distribute rewards' and DISTRIBUTE_REWARDS:
-                            distribute_rewards()
+                        elif message == 'distribute rewards':
+                            if DISTRIBUTE_REWARDS:
+                                distribute_rewards()
+                            else:
+                                send_text('DISTRIBUTE_REWARDS disabled')
 
                         elif message == 'enable next feature':
                             enable_next_feature()
