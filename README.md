@@ -8,6 +8,7 @@ Yeah shitcode, but i'm trying be helpful xD
 ## How it works
 
 - Works on waves service (docker not supported), tested on ubuntu only
+- Uses telegram get_updates method, to avoid dances with ssl certificate to use webhooks
 - Node update through deb package
 - Node height/version/features through local rest api
 - Restart/update through ```os.system```
