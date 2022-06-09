@@ -106,8 +106,6 @@ def restart_node():
 def enable_next_feature():
     node_features = json.loads(check_node_features())
 
-    print(node_features[-1]['nodeStatus'])
-
     if node_features[-1]['nodeStatus'] == 'VOTED':
         send_text('Already enabled')
     else:
@@ -138,8 +136,6 @@ def run_telegram_bot():
                     message = message['message']['text']
 
                     if ADMIN_CHAT_ID == message_chat_id:
-                        print(f"Message: {message}")
-
                         if message == '/start':
                             start()
 
@@ -175,7 +171,7 @@ def run_telegram_bot():
                             send_text('node updated')
 
         except requests.exceptions.ConnectionError:
-            print("Connection refused")
+            print("Connection refused to telegram endpoint")
 
 
 def run_distribute_rewards():
