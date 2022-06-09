@@ -60,3 +60,9 @@ WantedBy=multi-user.target
 - ```sudo systemctl daemon-reload```
 - ```sudo systemctl enable test-py.service``` (or how you called it while creating service file)
 - ```sudo systemctl start test-py.service```
+
+---
+- Sometimes after launching service, freshly created bots do not respond, how to fix:
+   - Launch main.py through ssh ```python3 main.py```
+   - Send /start to your bot
+   - Interrupt your script (ctrl + c), service should start working by itself
