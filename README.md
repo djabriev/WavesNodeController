@@ -3,7 +3,7 @@ Control panel for waves node (ubuntu only i guess), implemented through telegram
 Yeah shitcode, but i'm trying be helpful xD
 
 ## Functionality
-![alt text](https://i.ibb.co/mhwMS7M/image.png)
+![alt text](https://i.ibb.co/C1BwMbJ/image.png)
 
 ## How it works
 
