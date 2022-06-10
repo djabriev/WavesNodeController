@@ -51,14 +51,14 @@ def start():
                 ],
                 [
                     {"text": "check node features"},
+                    {"text": "check node balance"},
+                ],
+                [
                     {"text": "restart node"},
-
-                ],
-                [
                     {"text": "distribute rewards"},
-                    {"text": "update node"},
                 ],
                 [
+                    {"text": "update node"},
                     {"text": "enable next feature"},
                 ]
             ]
@@ -88,6 +88,12 @@ def check_node_version():
 def check_node_features():
     features = requests.get(f'{MY_NODE_ADDRESS}/activation/status').json()['features']
     return json.dumps(features, indent=2)
+
+
+def check_node_balance():
+    main_address = requests.get(f'{MY_NODE_ADDRESS}/addresses').json()[0]
+    balance = requests.get(f'{MY_NODE_ADDRESS}/addresses/balance/{main_address}').json()['balance'] / 100000000
+    return f'Node balance: {balance} waves'
 
 
 def distribute_rewards():
@@ -147,6 +153,9 @@ def run_telegram_bot():
 
                         elif message == 'check node features':
                             send_text(check_node_features())
+
+                        elif message == 'check node balance':
+                            send_text(check_node_balance())
 
                         elif message == 'restart node':
                             restart_node()
