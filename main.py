@@ -131,7 +131,7 @@ def enable_next_feature():
 def run_telegram_bot():
     update_id = get_updates()[-1]['update_id']
     while True:
-        time.sleep(3)
+        time.sleep(5)
 
         try:
             messages = get_updates(update_id)
