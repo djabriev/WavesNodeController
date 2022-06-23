@@ -129,7 +129,7 @@ def enable_next_feature():
 
 
 def run_telegram_bot():
-    update_id = get_updates()[-1]['update_id']
+    update_id = 0
     while True:
         time.sleep(5)
 
