@@ -27,6 +27,7 @@ WAVES_NODE_ADDRESS = 'https://nodes.wavesnodes.com'
 DISTRIBUTE_REWARDS = True  # Distribute rewards functionality
 DISTRIBUTE_REWARDS_SCRIPT = '/home/distribute.py'  # path to your distribute rewards python script
 NODE_CONFIG_DIRECTORY = '/usr/share/waves/conf'
+beneficiaryAddress = ''  # your beneficiaryAddress
 
 
 def get_updates(offset=0):
@@ -58,7 +59,10 @@ def start():
                 [
                     {"text": "update node"},
                     {"text": "enable next feature"},
-                ]
+                ],
+                [
+                    {"text": "check beneficiary address balance"},
+                ],
             ]
         }
     )
@@ -92,6 +96,11 @@ def check_node_balance():
     main_address = requests.get(f'{MY_NODE_ADDRESS}/addresses').json()[0]
     balance = requests.get(f'{MY_NODE_ADDRESS}/addresses/balance/{main_address}').json()['balance'] / 100000000
     return f'Node balance: {balance} waves'
+
+
+def check_ben_balance():
+    balance = requests.get(f'{MY_NODE_ADDRESS}/addresses/balance/{beneficiaryAddress}').json()['balance'] / 100000000
+    return f'Beneficiary address balance: {balance} waves'
 
 
 def distribute_rewards():
@@ -154,6 +163,9 @@ def run_telegram_bot():
 
                         elif message == 'check node balance':
                             send_text(check_node_balance())
+
+                        elif message == 'check beneficiary address balance':
+                            send_text(check_ben_balance())
 
                         elif message == 'restart node':
                             restart_node()
