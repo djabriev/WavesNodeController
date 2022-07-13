@@ -24,10 +24,8 @@ URL = 'https://api.telegram.org/bot'
 ADMIN_CHAT_ID = 0  # get your chat id here: @chat_id_echo_bot
 MY_NODE_ADDRESS = 'http://localhost:6870'
 WAVES_NODE_ADDRESS = 'https://nodes.wavesnodes.com'
-DISTRIBUTE_REWARDS = False  # Distribute rewards functionality
-DISTRIBUTE_REWARDS_AUTO = False  # Distributing rewards automatically in n seconds
+DISTRIBUTE_REWARDS = True  # Distribute rewards functionality
 DISTRIBUTE_REWARDS_SCRIPT = '/home/distribute.py'  # path to your distribute rewards python script
-DISTRIBUTE_REWARDS_INTERVAL = 21600  # auto rewards distribution interval (seconds), only if DISTRIBUTE_REWARDS_AUTO = True
 NODE_CONFIG_DIRECTORY = '/usr/share/waves/conf'
 
 
@@ -186,19 +184,9 @@ def run_telegram_bot():
             print("Connection refused to telegram endpoint")
 
 
-def run_distribute_rewards():
-    while True:
-        distribute_rewards()
-        time.sleep(DISTRIBUTE_REWARDS_INTERVAL)
-
-
 def run():
     tg_bot_thread = threading.Thread(target=run_telegram_bot)
     tg_bot_thread.start()
-
-    dist_rewards_thread = threading.Thread(target=run_distribute_rewards)
-    if DISTRIBUTE_REWARDS_AUTO and DISTRIBUTE_REWARDS:
-        dist_rewards_thread.start()
 
 
 if __name__ == '__main__':
