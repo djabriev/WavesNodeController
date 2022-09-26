@@ -1,5 +1,7 @@
 import json
 import os
+import traceback
+
 import telebot
 import requests
 from telebot import types
@@ -78,38 +80,47 @@ def get_text_messages(message):
     if message.from_user.id != ADMIN_CHAT_ID:
         return
 
-    if message.text == '/start':
-        start(message)
+    try:
+        if message.text == '/start':
+            start(message)
 
-    elif message.text == 'check node height':
-        bot.send_message(message.from_user.id, check_node_height())
+        elif message.text == 'check node height':
+            bot.send_message(message.from_user.id, check_node_height())
 
-    elif message.text == 'check node version':
-        bot.send_message(message.from_user.id, check_node_version())
+        elif message.text == 'check node version':
+            bot.send_message(message.from_user.id, check_node_version())
 
-    elif message.text == 'check node features':
-        bot.send_message(message.from_user.id, check_node_features())
+        elif message.text == 'check node features':
+            bot.send_message(message.from_user.id, check_node_features())
 
-    elif message.text == 'check beneficiary address balance':
-        bot.send_message(message.from_user.id, check_ben_balance())
+        elif message.text == 'check beneficiary address balance':
+            bot.send_message(message.from_user.id, check_ben_balance())
 
-    elif message.text == 'restart node':
-        restart_node(message)
+        elif message.text == 'restart node':
+            restart_node(message)
 
-    elif message.text == 'enable next feature':
-        enable_next_feature(message)
+        elif message.text == 'enable next feature':
+            enable_next_feature(message)
 
-    elif message.text == 'update node':
-        bot.send_message(message.from_user.id,
-                         'please use command "/updatenode github_link_to_deb_package"\n\nexample: \n/updatenode '
-                         'https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.4.6_all.deb')
+        elif message.text == 'update node':
+            bot.send_message(message.from_user.id,
+                             'please use command "/updatenode github_link_to_deb_package"\n\nexample: \n/updatenode '
+                             'https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.4.6_all.deb')
 
-    elif '/updatenode https://github.com/wavesplatform/Waves/' in message.text:
-        url = message.text.split(' ')[1]
-        version = url.split('/')[-1]
-        os.system(
-            f'wget {url} && systemctl stop waves && dpkg -i {version} && systemctl start waves && rm {version}')
-        bot.send_message(message.from_user.id, 'node updated')
+        elif '/updatenode https://github.com/wavesplatform/Waves/' in message.text:
+            url = message.text.split(' ')[1]
+            version = url.split('/')[-1]
+            os.system(
+                f'wget {url} && systemctl stop waves && dpkg -i {version} && systemctl start waves && rm {version}')
+            bot.send_message(message.from_user.id, 'node updated')
+    except:
+        ex = traceback.format_exc()
+
+        try:
+            bot.send_message(message.from_user.id, ex)
+        except:
+            # todo: file logging
+            print(ex)
 
 
 def run():
