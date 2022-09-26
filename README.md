@@ -15,7 +15,6 @@ Yeah shitcode, but i'm trying be helpful xD
 - Node height/version/features through local rest api
 - Restart/update through ```os.system```
 - Enable next feature - script open waves.conf file and looks for string ```supported = [``` then replaces it with ```supported = [id,``` (hardcoded like this to avoid external package imports)
-- [Can be turned off by ```DISTRIBUTE_REWARDS = False```] Distribute rewards just runs external script that you should provide (example: https://github.com/waves-exchange/neutrino-utilities/blob/main/neutrino_nodes/payment.py)
 
 ## Requirements
 - ``pip install -r requirements.txt``
