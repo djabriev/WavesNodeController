@@ -1,3 +1,5 @@
+```pip install -r requirements.txt```
+
 Control panel for waves node (ubuntu only i guess), implemented through telegram bot api (bot will react only to your chat_id, so no one besides you can interact with bot)
 
 Yeah shitcode, but i'm trying be helpful xD
@@ -16,6 +18,7 @@ Yeah shitcode, but i'm trying be helpful xD
 - [Can be turned off by ```DISTRIBUTE_REWARDS = False```] Distribute rewards just runs external script that you should provide (example: https://github.com/waves-exchange/neutrino-utilities/blob/main/neutrino_nodes/payment.py)
 
 ## Requirements
+- ``pip install -r requirements.txt``
 - Correctly installed node (https://docs.waves.tech/en/waves-node/how-to-install-a-node/on-ubuntu)
 - Ubuntu
 - Python 3
@@ -30,8 +33,7 @@ waves {
 } 
 ```
 - Telegram bot (bot token and your user_id, user_id can be found using @chat_id_echo_bot)
-- If you are going to use distribute rewards functionality, then prepare python script for this job and provide path to this python file in DISTRIBUTE_REWARDS_SCRIPT variable, script will be executed through ```exec``` function
-- Fill variable values at the top of file, required to change: ```TOKEN```, ```ADMIN_CHAT_ID```, ```DISTRIBUTE_REWARDS_SCRIPT``` (if you are going to use rewards distribution), the rest of the constants as you wish
+- Fill variable values at the top of file, required to change: ```TOKEN```, ```ADMIN_CHAT_ID```, the rest of the constants as you wish
 
 ## Tips
 I'm using this script as service to keep it alive and run automatically after restart of server
